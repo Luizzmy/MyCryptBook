@@ -16,7 +16,7 @@ const postService = axios.create({
 export const getUserPost = () => postService.get(`/allPosts`)
 
 // details
-export const getPostDetails = id => postService.get(`/${id}`)
+export const getPostDetails = (_id) => postService.get(`/detail/${_id}`)
 
 // create
 export const postcreate = data => postService.post('/create', data)

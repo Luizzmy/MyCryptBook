@@ -16,21 +16,24 @@ const [showUptadeModal, setShowUpdateModal]=useState(false)
 
 
   return (
+    
     <Card
-      type="inner"
-      title={title}
-      // extra={<Link to={`/PostDetail/${_id}`}>  Update / Delete</Link>} //how to link it???
-      style={{ marginBottom: '8px' }}
       hoverable
+      
+      title={<Link to={`/detail/${_id}`}>{title}</Link>}
+      style={{ marginBottom: '8px',textAlign:"left" }}
+      
     >
+      <Link to={`/detail/${_id}`}>
        <center>
         {/* <Avatar src={image} style={{ backgroundColor: 'white' }} /> */}
         {/* <Title level={4}>Card</Title> */}
       </center>
-      {comment}
+      {summary}
       <br/>
       <br/>
-      <Button type="dash" block style={{ marginBottom: "10px" }} onClick={() => setShowUpdateModal(true)}> Update a Post!!!</Button>
+      </Link>
+      <Button type="dash" block style={{ marginBottom: "10px" }} onClick={() => setShowUpdateModal(true)}> Edit Post</Button>
 
       <Modal visible={showUptadeModal}
         footer={null}

@@ -4,20 +4,21 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios'
 import { postcreate } from '../services/post'
 // add cloudinary account here 
-const cloudinaryAPI = ''
+const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/devykcsdg/image/upload'
 
 const CreatePostForm = ({addPost}) => {
     const [form] = Form.useForm()
     const [img, setImg] = useState(null)
     const [loading, setLoading] = useState(null)
 
-
-
     async function handleSubmit(values) {
 
         console.log(values)
         
-        const data =values;
+        const data ={
+            ...values,
+            image:img
+        };
         console.log(data)
         const newPost = await postcreate(data)
         .catch(e=> console.log(e.response));
@@ -63,10 +64,10 @@ const CreatePostForm = ({addPost}) => {
             {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
             </Upload>
             </Form.Item>
-            <Form.Item name="summary" label="Summary:">
+            <Form.Item name="summary" label="Summary:" placeholder="Write a short summary that describes the general content of your article">
             <Input.TextArea rows={5}/>
             </Form.Item>
-            <Form.Item name="comment" label="Content:">
+            <Form.Item name="comment" label="Content:" placeholder="Tell us everything about your idea/opinion/review!">
             <Input.TextArea rows={10}/>
             </Form.Item>
             <Button type='primary' block size='middle' htmlType='submit'>create post</Button>
