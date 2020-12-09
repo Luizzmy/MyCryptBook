@@ -47,16 +47,16 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('dev'));
 
-const index = require('./routes/index');
-const auth = require('./routes/auth');
-const post=require('./routes/post')
-const recoms=require('./routes/recomendation')
-app.use('/', index);
-app.use('/', auth);
-app.use('/posts', post)
-app.use('/recoms', recoms)
+
+// const post=require('./routes/post')
+// const recoms=require('./routes/recomendation')
+
+app.use(express.static('public/build'))
+
+// app.use('/posts', post)
+// app.use('/recoms', recoms)
 
 // Uncomment this line for production
-// app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/build/index.html`));
 
 module.exports = app;
