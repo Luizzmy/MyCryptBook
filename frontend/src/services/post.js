@@ -22,7 +22,7 @@ export const getPostDetails = id => postService.get(`/${id}`)
 export const postcreate = data => postService.post('/create', data)
 
 // edit-update
-export const postUpdate = (id, post) => postService.put(`/${id}`, post)
+export const postUpdate = (id, post) => postService.put(`/edit/${id}`, post)
 
 //delete
-export const postDelete = id => postService.delete(`/${id}`)
+export const postDelete = id => postService.get(`/delete/${id}`)

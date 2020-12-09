@@ -26,7 +26,7 @@ router.post("/login", catchErrs(login));
 router.post("/signup", catchErrs(signup));
 
 //Logged In user
-router.get('/current-user', catchErrs(currentUser))
+router.get('/current-user', currentUser)
 
 //Update user
 router.put('/userUpdate', catchErrs(updateUser))

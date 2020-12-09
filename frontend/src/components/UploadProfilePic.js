@@ -13,11 +13,11 @@ const handleSubmit= e=>{
 
 const handleUploadPhoto = async ({target: {files}}) =>{
 
-    const cloudinaryAPI= 'https://api.cloudinary.com/v1_1/devykcsdg/image/crypto'
+    const cloudinaryAPI= 'https://api.cloudinary.com/v1_1/devykcsdg/image/upload'
 
     const data=new FormData()
     data.append('file', files[0])
-    data.append('ipload_preset', 'uploadcrypto')
+    data.append('upload_preset', 'uploadcrypto')
 
     const {data:{secure_url}}= await axios.post(cloudinaryAPI, data)
     setImage(secure_url)
