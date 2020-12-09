@@ -16,7 +16,7 @@ import CreateRecomForm from '../components/createRecomForm'
 import { Link } from 'react-router-dom';
 
 //URLs for APIs
-let priceURL= 'http://rest-sandbox.coinapi.io/v1/ohlcv/GEMINI_SPOT_BTC_USD/latest?period_id=1HRS'
+let priceURL= 'https://rest-sandbox.coinapi.io/v1/ohlcv/GEMINI_SPOT_BTC_USD/latest?period_id=1HRS'
 let newsURL='https://feed.cryptoquote.io/api/v1/news/headlines?search=BTC&key=778fae00-359b-11eb-a7c8-83b5e7f8291c'
 
 //Other const to be used in content of page
