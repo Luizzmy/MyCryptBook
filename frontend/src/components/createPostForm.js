@@ -14,17 +14,13 @@ const CreatePostForm = ({addPost}) => {
 
 
     async function handleSubmit(values) {
-        const{ title, comment}=values
 
-        // const post={...values,image:img}
-        // const { data: newPost} =await postcreate(post)
-        // addPost(newPost);
-        // form.resetFields();
-        // setImg(null)
+        console.log(values)
         
         const data =values;
-        console.log(form.values)
-        const newPost = await postcreate(data).catch(e=> console.log(e.response));
+        console.log(data)
+        const newPost = await postcreate(data)
+        .catch(e=> console.log(e.response));
         await addPost(newPost.data);
         form.resetFields()
         setImg(null)
@@ -34,12 +30,16 @@ const CreatePostForm = ({addPost}) => {
     async function handleUploadFile(file) {
         setLoading(true)
         const data = new FormData()
+    
         data.append('file', file)
-        data.append('upload_preset', '') //cloudinary config
+        data.append('upload_preset','uploadcrypto')
+        
+    
         const { data: { secure_url } } = await axios.post(cloudinaryAPI, data)
+    
         setImg(secure_url);
         setLoading(false)
-    }
+      }
 
     const uploadButton = (
         <div>
@@ -54,26 +54,21 @@ const CreatePostForm = ({addPost}) => {
             <Form.Item name="title" label='Title:'>
             <Input />
             </Form.Item>
-            <Form.Item name="comment" label="Comment:">
-            <Input />
-            </Form.Item>
-            {/* <Form.Item name='image' label='Image:' />
-            <Form.Item name='image' label='Image:' />
-            <Upload name="image"
+            <Form.Item name="image" label="Add a picture to your article:">
+            <Upload
+                name="image"
                 showUploadList={false}
-                beforeUpload={handleUploadFile}>
-                {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
+                beforeUpload={handleUploadFile}
+            >
+            {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
             </Upload>
-            <Form.Item /> */}
-
-
-            {/* <Select>
-            <Select.Option value="POSTES">POSTES
-
-            </Select.Option>
-
-
-            </Select> */}
+            </Form.Item>
+            <Form.Item name="summary" label="Summary:">
+            <Input.TextArea rows={5}/>
+            </Form.Item>
+            <Form.Item name="comment" label="Content:">
+            <Input.TextArea rows={10}/>
+            </Form.Item>
             <Button type='primary' block size='middle' htmlType='submit'>create post</Button>
 
 

@@ -28,16 +28,15 @@ const Login = ({ history }) => {
     .then(data=>{
       console.log(data)
       login({data})
-      history.push('/profile')
+      history.push('/')
+      history.go(0)
+      
     })
     .catch(err=>{
       const errorInfo=err.response.data.message
       console.log(errorInfo)
       errormessage(errorInfo)
     })
-
-    // ,
-    // )
    
   }
   return (
@@ -53,9 +52,11 @@ const Login = ({ history }) => {
           <Form.Item name='password' label="Password:" rules={[{required:true, message:'password is required'}]}>
             <Input.Password />
           </Form.Item>
+          
           <Button type="primary" block htmlType="submit">
             Login
           </Button>
+
         </Form>
         <Divider>
           Or
