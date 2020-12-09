@@ -4,20 +4,21 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios'
 import { postcreate } from '../services/post'
 // add cloudinary account here 
-const cloudinaryAPI = ''
+const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/devykcsdg/image/upload'
 
 const CreatePostForm = ({addPost}) => {
     const [form] = Form.useForm()
     const [img, setImg] = useState(null)
     const [loading, setLoading] = useState(null)
 
-
-
     async function handleSubmit(values) {
 
         console.log(values)
         
-        const data =values;
+        const data ={
+            ...values,
+            image:img
+        };
         console.log(data)
         const newPost = await postcreate(data)
         .catch(e=> console.log(e.response));

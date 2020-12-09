@@ -188,14 +188,17 @@ function Home() {
     size="large"
     dataSource={posts}
     renderItem={i=>(
+      <a href={`/detail/${i._id}`}>
       <List.Item
-      key={i._id}>
+      key={i._id}
+      >
         <List.Item.Meta
         title={i.title}
         description={i.comment}
         style={{textAlign:"right"}}
         />
       </List.Item>
+      </a>
     )}
     />:<LoadingOutlined style={{ fontSize: 24 }} spin />
     :    <div style={{textAlign:"center"}}>

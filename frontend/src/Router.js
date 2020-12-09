@@ -5,14 +5,14 @@ import Profile from './pages/Profile';
 import Btc from './pages/Btc';
 import Ltc from './pages/Ltc';
 import Eth from './pages/Eth';
-// import PostDetail from './pages/RudPostForm';
+import PostDetail from './pages/PostDetail';
 import NotFound from './components/404/NotFound.js';
 import LayoutApp from './components/layoutApp'
 
 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import PostCard from './components/PostCard';
+
 
 
 
@@ -32,7 +32,7 @@ const Router = () => (
       <Route component={Btc} path='/btc' />
       <Route component={Ltc} path='/ltc' />
       <Route component={Eth} path='/eth' />
-      {/* <Route component={PostDetail} path='/PostDetail/:postId' /> */}
+      <Route component={PostDetail} path='/detail/:postId' />
       <Route component={NotFound} />
     </Switch>
     </LayoutApp>
