@@ -7,8 +7,8 @@ import {VictoryLine,
   VictoryLabel,
   VictoryVoronoiContainer,
   VictoryTooltip} from 'victory'
-import { Spin, Row, Col,List, Avatar, Typography, Button, Modal  } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, message, Space, Tooltip, DatePicker } from 'antd';
+import { LoadingOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
 import { useContextData } from '../hooks/context';
 import EditRecomForm from '../components/EditRecomForm'
 
@@ -16,7 +16,7 @@ import CreateRecomForm from '../components/createRecomForm'
 import { Link } from 'react-router-dom';
 
 //URLs for APIs
-let priceURL= 'https://rest-sandbox.coinapi.io/v1/ohlcv/GEMINI_SPOT_BTC_USD/latest?period_id=1HRS'
+
 let newsURL='https://feed.cryptoquote.io/api/v1/news/headlines?search=BTC&key=778fae00-359b-11eb-a7c8-83b5e7f8291c'
 
 //Other const to be used in content of page
@@ -24,8 +24,27 @@ const curr="BTC"
 const {Text}=Typography
 
 
-function BTC() {
+//Date fields need a paid version of the API used for prices, for now using the free version. 
+// let today=new Date()
+// let yesterday=new Date(today)
+// yesterday.setDate(yesterday.getDate()-1)
 
+// function convert(date){
+// let time_converted=date.getFullYear()+"-"+
+// (date.getMonth()<10? (('0'+date.getMonth()).substring(-2)):(date.getMonth()))+"-"+
+// (date.getDate()<10? (('0'+date.getDate()).substring(-2)):(date.getDate()))+"T"+
+// (date.getHours()<10? (('0'+date.getHours()).substring(-2)):(date.getHours()))+":"+
+// (date.getMinutes()<10? (('0'+date.getMinutes()).substring(-2)):(date.getMinutes()))+":"+
+// (date.getSeconds()<10? (('0'+date.getSeconds()).substring(-2)):(date.getSeconds()))
+// return time_converted
+// }
+
+// let time_end= convert(today)
+// let time_start=convert(yesterday)
+
+
+function BTC() {
+  let periodId="1HRS"
   //initial useState hooks
   const [bitcoins, setBitcoin]=useState(null)
   const [bitcoinsNews, setBitcoinNews]=useState(null)
@@ -33,17 +52,28 @@ function BTC() {
   const [showModal, setShowModal]=useState(false)
   const [showEditModal, setShowEditModal]=useState(false)
   const [itemEdit, setItemEdit]=useState(false)
-  // const [reco, setReco]=useState(null)
+  const [period_id, setPeriod]=useState(periodId)
+  const [changed, setChanged]=useState(false)
+
 
   //User context data
   const { user } = useContextData()
 
+  
+  
+
+  let priceURL= 'https://rest-sandbox.coinapi.io/v1/ohlcv/GEMINI_SPOT_BTC_USD/latest?period_id='
+  
+
   //useEffect hook for initial REST get API functions
    useEffect(()=>{
+
+    
+//https://rest.coinapi.io/v1/ohlcv/GEMINI_SPOT_BTC_USD/history?period_id=1DAY&time_start=2016-01-01T00:00:00&time_end=2020-01-01T00:00:00
     
      async function getBitcoin(){
        const {data}=await axios.
-       get(priceURL, 
+       get(priceURL+period_id, 
         {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
         
        setBitcoin(data.reverse())
@@ -105,6 +135,54 @@ function BTC() {
     >
       <Button className onClick={onLoadMore}>More</Button>
     </div>)
+
+    useEffect(() => {
+      async function getBitcoin(period){
+        console.log(period)
+        const {data}=await axios.
+        get(priceURL+period, 
+         {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
+         
+        setBitcoin(data.reverse())
+      }
+      getBitcoin(period_id)
+      setChanged(false)
+    }, [changed])
+
+function handleMenuClick(e) {
+  setPeriod(e.key)
+  setChanged(true)
+}
+
+
+const menu = (
+  <Menu onClick={handleMenuClick}>
+    <Menu.Item key="1MIN">
+      1MIN
+    </Menu.Item>
+    <Menu.Item key="15MIN">
+      15MIN
+    </Menu.Item>
+    <Menu.Item key="30MIN">
+      30MIN
+    </Menu.Item>
+    <Menu.Item key="1HRS">
+      1HRS
+    </Menu.Item>
+    <Menu.Item key="12HRS">
+      12HRS
+    </Menu.Item>
+    <Menu.Item key="1DAY">
+      1DAY
+    </Menu.Item>
+    <Menu.Item key="7DAY">
+      7DAY
+    </Menu.Item>
+    <Menu.Item key="1MTH">
+      1MTH
+    </Menu.Item>
+  </Menu>
+);
   
 
   //Div rendered in the page
@@ -116,11 +194,20 @@ function BTC() {
           <div>
 
             {/*-----Chart with historical prices-----*/}
+            <Space wrap>
+            <Tooltip placement="topLeft" title="Quotes frequency in the graph">
+    <Dropdown overlay={menu}>
+      <Button>
+        {period_id} <DownOutlined />
+      </Button>
+    </Dropdown>
+    </Tooltip>
+  </Space>
       {bitcoins?
       <VictoryChart
       height={200}
       containerComponent={<VictoryVoronoiContainer
-        labels={({ datum }) => `$${datum.y}, ${datum.x.slice(0,16)} `}
+        labels={({ datum }) => `$${datum.y}, ${datum.x.slice(0,16)} UTC `}
         labelComponent={
           <VictoryTooltip  dy={-1} constrainToVisibleArea />
         }
