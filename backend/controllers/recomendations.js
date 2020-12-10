@@ -19,8 +19,14 @@ const User = require('../models/User');
 
 // Get all recommendations
 exports.allRecommendations = async (req, res) => {
-    const recomendations = await  Recomendation.find()
+    const recomendations = await  Recomendation.find().populate('userId')
 
+    res.status(200).json(recomendations)
+}
+
+exports.getAllUserRecoms= async (req, res) =>{
+    const userId=req.user._id
+    const {recomendations}=await User.findById(userId)
     res.status(200).json(recomendations)
 }
 
@@ -49,7 +55,7 @@ res.status(201).json(newRecomendation)
 //Recommendation Detail
 exports.getRecomDetail = async (req, res) => {
     const { recomendationId } = req.params
-    const recom = await  Recomendation.findById(recomendationId)
+    const recom = await  Recomendation.findById(recomendationId).populate('userId')
 
     res.status(200).json(recom)
 }

@@ -11,6 +11,7 @@ function PostDetail({
     }) {
 
     const [postD, setPostD]=useState(null)
+    console.log(postD)
 
      useEffect(()=>{
          
@@ -29,7 +30,7 @@ function PostDetail({
             {postD? <><br/><Title>{postD.title}</Title>
             <br/>
             <Image width={150} src={postD.image} style={{alignSelf:"center"}} />
-            <br/>
+            <br/>Id
             <br/>
     <Text type="secondary"><b>By:</b><Link to={`/${postD.userId._id}`}>{postD.userId.name} {postD.userId.lastname}</Link></Text>
     <br/>
