@@ -55,6 +55,7 @@ function BTC() {
   const [period_id, setPeriod]=useState(periodId)
   const [changed, setChanged]=useState(false)
 
+
   //User context data
   const { user } = useContextData()
 
@@ -86,10 +87,12 @@ function BTC() {
      async function getRecoms(){
        const {data}=await getReco()
        console.log(data)
+      //  setReco(data)
        setRecoms(data.
         filter(r=>r.crypto=="BTC")
         .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1)
         .slice(0,3))
+
      }
      
      getBitcoin()
@@ -246,6 +249,7 @@ const menu = (
       dataSource={recoms}
       renderItem={item => (
       <List.Item 
+      
       actions={user? 
         item.userId==user._id?
           [<a key="list-loadmore-edit" 
@@ -255,16 +259,22 @@ const menu = (
               }
             >edit</a>
           ]:
-          ["Author's profile"]:""}
+          [<Text type="secondary"><b>written:</b><Link to={`/${item.userId._id}`}>{item.userId.name ? item.userId.name : ""}  </Link></Text>  ]:""}
       >
             <List.Item.Meta
               avatar={
-                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                // <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                <Avatar size={80} src={item.userId ? item.userId.image : ""}/>
+
               }
               title={item.title}
               description={`Created: ${item.createdAt.slice(5,16)} | Estimate: ${item.estimate} | Actual: ${item.actual} | Surprise: ${item.surprise}`}
             />
             <p>Recomendation: {item.recomendation}</p>
+            
+           
+
+    
         </List.Item>
       )
     } 
@@ -335,3 +345,5 @@ const menu = (
 }
 
 export default BTC;
+
+// done
