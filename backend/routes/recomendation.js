@@ -2,6 +2,7 @@ const Router=require('express')
 const {
     allRecommendations,
     creatRecomendation,
+    getAllUserRecoms,
     updateRecomendations,
     getRecomDetail,
     deleteRecomendation
@@ -22,6 +23,9 @@ router.put('/edit/:recomendationId', isAuth, catchErrs(updateRecomendations))
 
 //List All Recomendations
 router.get('/allRecomendations', isAuth, catchErrs(allRecommendations))
+
+//List All Users posts
+router.get('/allUserRecoms', isAuth, catchErrs(getAllUserRecoms))
 
 //Recom Details
 router.get('/detail/:recomendationId', isAuth, catchErrs(getRecomDetail))
