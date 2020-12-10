@@ -3,8 +3,7 @@ import axios from 'axios'
 const prefix = '/posts'
 
 const baseURL = process.env.NODE_ENV === 'development' ?
-  `http://localhost:3000${prefix}` :
-  prefix
+  `http://localhost:3000${prefix}` : `https://infinite-cove-99947.herokuapp.com${prefix}`
 
 const postService = axios.create({
   baseURL,
