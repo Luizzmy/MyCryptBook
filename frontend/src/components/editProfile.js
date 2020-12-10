@@ -55,13 +55,13 @@ function EditProfile() {
 
     return (
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
-        <Form.Item name="name" label="First Name:" initialValue={user.user.name}>
+        <Form.Item name="name" label="First Name:" initialValue={user.user.name} rules={[{ required: true, message: 'Please input your Name!' }, { min: 3, message: 'Must be minimum 3 characters.' },]}>
           <Input />
         </Form.Item>
-        <Form.Item name="lastname" label="Last Name:" initialValue={user.user.lastname}>
+        <Form.Item name="lastname" label="Last Name:" initialValue={user.user.lastname} rules={[{ required: true, message: 'Please input your Name!' }, { min: 3, message: 'Must be minimum 3 characters.' },]}>
           <Input />
         </Form.Item>
-        <Form.Item name="email" label="Email:" initialValue={user.user.email}>
+        <Form.Item name="email" label="Email:" initialValue={user.user.email} rules={[{required:true, type:'email', message:'please input your email'}]}>
           <Input />
         </Form.Item>
         <Form.Item name="image" label="Image:">
@@ -73,7 +73,7 @@ function EditProfile() {
           {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
         </Upload>
       </Form.Item>
-        <Button type="primary" block size="middle" htmlType="submit">Edit Recomendation</Button>
+        <Button type="primary" block size="middle" htmlType="submit">Edit Profile</Button>
       </Form>
     )
 }

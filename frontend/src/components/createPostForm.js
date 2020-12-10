@@ -52,7 +52,7 @@ const CreatePostForm = ({addPost}) => {
     return (
 
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
-            <Form.Item name="title" label='Title:'>
+            <Form.Item name="title" label='Title:' rules={[{required:true, }]}>
             <Input />
             </Form.Item>
             <Form.Item name="image" label="Add a picture to your article:">
@@ -64,13 +64,13 @@ const CreatePostForm = ({addPost}) => {
             {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
             </Upload>
             </Form.Item>
-            <Form.Item name="summary" label="Summary:" placeholder="Write a short summary that describes the general content of your article">
+            <Form.Item placeholder="Write a short summary that describes the general content of your article" name="summary" label="Summary:" rules={[{required:true, }]}>
             <Input.TextArea rows={5}/>
             </Form.Item>
-            <Form.Item name="comment" label="Content:" placeholder="Tell us everything about your idea/opinion/review!">
-            <Input.TextArea rows={10}/>
+            <Form.Item name="comment" label="Content:" placeholder="Tell us everything about your idea/opinion/review!" rules={[{required:true, }]}>
+            <Input.TextArea rows={6}/>
             </Form.Item>
-            <Button type='primary' block size='middle' htmlType='submit'>create post</Button>
+            <Button type='primary' block size='middle' htmlType='submit' rules={[{required:true, }]}>create post</Button>
 
 
         </Form>
@@ -78,4 +78,6 @@ const CreatePostForm = ({addPost}) => {
 }
 
 export default CreatePostForm
+
+
 

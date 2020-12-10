@@ -63,7 +63,7 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
 
     return (
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
-            <Form.Item name="title" label='Title:' initialValue={title}>
+            <Form.Item name="Title" label='Title:' initialValue={title} rules={[{required:true, }]}>
                 <Input />
             </Form.Item>
             <Form.Item name="image" label="Add a new picture to your article:">
@@ -75,11 +75,11 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
             {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
             </Upload>
             </Form.Item>
-            <Form.Item name="summary" label="Summary:" initialValue={summary}>
+            <Form.Item name="Summary" label="Summary:" initialValue={summary} rules={[{required:true, }]}>
             <Input.TextArea rows={5}/>
             </Form.Item>
-            <Form.Item name="comment" label="Comment:" initialValue={comment}>
-                <Input />
+            <Form.Item name="Comment" label="Comment:" initialValue={comment} rules={[{required:true, }]}>
+            <Input.TextArea rows={5}/>
             </Form.Item>
 
             <Button type="primary" htmlType="submit" block>Edit post</Button>
