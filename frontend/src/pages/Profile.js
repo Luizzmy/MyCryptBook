@@ -72,16 +72,9 @@ const Profile = () => {
       </Modal>
         </Card>
       </Col>
-
-
-
-
       <Col xs={24} sm={24} md={12}>
-
-
         <Card title="Posts">
           <Button type="dash" block style={{ marginBottom: "10px" }} onClick={() => setShowModal(true)}> Write an article!</Button>
-
           {user? 
             posts ?  
                 posts.filter(post=> post.userId==user._id)
@@ -89,9 +82,6 @@ const Profile = () => {
 
         </Card>
       </Col>
-
-
-
       <Modal visible={showModal}
         width={1000}
         footer={null}
@@ -102,12 +92,6 @@ const Profile = () => {
         <CreatePostForm addPost={addPost} />
 
       </Modal>
-
-
-
-
-
-
     </Row>
   :"loading")
 }

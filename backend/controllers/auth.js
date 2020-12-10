@@ -49,6 +49,14 @@ exports.currentUser = (req, res) => {
   res.json(req.user || null)
 }
 
+exports.userDetails = async (req, res) =>{
+  const {userId}=req.params
+  const user=await User.findById(userId).populate('posts')
+
+  res.status(200).json(user)
+
+}
+
 exports.logout = (req, res) => {
   req.logout()
   res.status(200).json({ message: 'logged out' })

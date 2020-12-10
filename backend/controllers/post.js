@@ -19,7 +19,7 @@ exports.getAllUserPosts = async (req, res) => {
 // View
 exports.getPostDetail = async (req, res) => {
     const { postId } = req.params
-    const post = await Post.findById(postId)
+    const post = await Post.findById(postId).populate('userId')
 
     res.status(200).json(post)
 }

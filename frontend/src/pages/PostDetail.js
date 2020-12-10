@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {getPostDetails} from '../services/post'
 import {Col, Row, Typography, Image} from 'antd'
 import { LoadingOutlined } from '@ant-design/icons';
-
+import { Link } from 'react-router-dom';
 const {Title, Text}=Typography
 
 function PostDetail({
@@ -11,16 +11,15 @@ function PostDetail({
     }) {
 
     const [postD, setPostD]=useState(null)
-    console.log(history)
-    console.log(postId)
 
      useEffect(()=>{
          
          async function getDetails(){
-         const {data}=await getPostDetails(postId)
-         console.log(data)
+         const {data}=await getPostDetails(postId) 
          setPostD(data)
+         console.log(data)
          }
+
        getDetails()  
      },[])
 
@@ -32,6 +31,11 @@ function PostDetail({
             <Image width={150} src={postD.image} style={{alignSelf:"center"}} />
             <br/>
             <br/>
+    <Text type="secondary"><b>By:</b><Link to={`/${postD.userId._id}`}>{postD.userId.name} {postD.userId.lastname}</Link></Text>
+    <br/>
+    <Text type="secondary"><b>Created:</b>{postD.createdAt}UTC</Text>
+    <br/>
+    <br/>
             <Text type="secondary">{postD.summary}</Text>
             <br/>
             <Text type="primary">{postD.comment}</Text></>:
