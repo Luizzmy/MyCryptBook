@@ -18,9 +18,6 @@ const {
     catchErrs
 }=require('../middlewares/auth')
 
-
-
-
 //Login route
 router.post("/login", catchErrs(login));
 
@@ -32,16 +29,12 @@ router.get('/current-user', currentUser)
 
 //Update user
 router.put('/userUpdate', catchErrs(updateUser))
-// router.get('/testing', currentUser)
+
+//Logout user
 router.get("/logout", logout);
 
 //User details
 router.get("/:userId", catchErrs(userDetails))
-
-//Logout user
-
-
-
 
 //Google authentication routes
 router.get('/auth/google', googleInit)
