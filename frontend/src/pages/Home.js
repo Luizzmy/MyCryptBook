@@ -14,7 +14,10 @@ const {Text, Title}=Typography
 const { Meta } = Card;
 
 function Home() {
+  //User context data
 
+  const { user } = useContextData()
+  
   //initial useState hooks
   const [news, setNews]=useState(null)
   const [bitcoinP, setBitcoinP]=useState(null)
@@ -23,8 +26,8 @@ function Home() {
   const [posts, setPosts]=useState(null)
 
 
-  //User context data
-  const { user } = useContextData()
+  
+  
 
   //useEffect hook for initial REST get API functions
   useEffect(()=>{

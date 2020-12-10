@@ -62,6 +62,11 @@ exports.logout = (req, res) => {
   res.status(200).json({ message: 'logged out' })
 }
 
+exports.test=(req,res)=>{
+  console.log("hola")
+  res.status(200)
+}
+
 exports.updateUser= async (req,res)=>{
   const id=req.user._id
   const {email, 

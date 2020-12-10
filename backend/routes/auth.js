@@ -5,7 +5,8 @@ const router = express.Router();
 
 const { signup, 
     login, 
-    logout, 
+    logout,
+    test,
     currentUser,
     userDetails,
     updateUser,
@@ -31,12 +32,16 @@ router.get('/current-user', currentUser)
 
 //Update user
 router.put('/userUpdate', catchErrs(updateUser))
+// router.get('/testing', currentUser)
+router.get("/logout", logout);
 
 //User details
 router.get("/:userId", catchErrs(userDetails))
 
 //Logout user
-router.get("/logout", logout);
+
+
+
 
 //Google authentication routes
 router.get('/auth/google', googleInit)
