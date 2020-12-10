@@ -4,6 +4,7 @@ import { useContextData } from '../hooks/context'
 import { getUserPost } from '../services/post'
 import PostCard from '../components/PostCard'
 import { userDetails } from '../services/auth'
+import WriteEmail from '../components/writeEmail'
 
 const { Title, Text } = Typography
 
@@ -11,6 +12,11 @@ function PublicProfile({
     match: { params: { userId}},
     history
     }) {
+
+    const {user}=useContextData()
+
+    const[showModal, setShowModal]=useState(false)
+
 
     const [userP, setUserP]= useState()
 
@@ -43,6 +49,15 @@ function PublicProfile({
           <br/>
           <br/></>
           }
+          <Button type="primary" onClick={()=>setShowModal(true)}>Contact by email</Button>
+          <Modal visible={showModal}
+        title="Send Email"
+        footer={null}
+        onOk={() => setShowModal(false)}
+        onCancel={() => setShowModal(false)}
+      >
+        <WriteEmail/>
+      </Modal>
         </Card>
             </Col>
             <Col xs={24} sm={24} md={12}>

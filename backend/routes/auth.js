@@ -6,9 +6,9 @@ const router = express.Router();
 const { signup, 
     login, 
     logout,
-    test,
     currentUser,
     userDetails,
+    sendEmail,
     updateUser,
     googleInit, 
     googleCb 
@@ -32,6 +32,9 @@ router.put('/userUpdate', catchErrs(updateUser))
 
 //Logout user
 router.get("/logout", logout);
+
+//Send Email
+router.post('/sendEmail/:userId', catchErrs(sendEmail))
 
 //User details
 router.get("/:userId", catchErrs(userDetails))
