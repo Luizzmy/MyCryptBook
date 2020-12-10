@@ -3,15 +3,17 @@ import { Descriptions } from 'antd'
 import { Link } from 'react-router-dom'
 import { Card, Avatar, Typography, Button, Modal } from 'antd'
 import UpdatePostForm from '../components/UpdatePostForm'
+import { useContextData } from '../hooks/context';
 
 const { Title } = Typography
 
 
 
-const PostCard = ({title, summary, comment, _id}) => {
+const PostCard = ({title, summary, comment, _id, userId}) => {
   let [posts, setPosts] = useState([])
 
 const [showUptadeModal, setShowUpdateModal]=useState(false)
+const { user } = useContextData()
 
 
 
@@ -33,7 +35,11 @@ const [showUptadeModal, setShowUpdateModal]=useState(false)
       <br/>
       <br/>
       </Link>
-      <Button type="dash" block style={{ marginBottom: "10px" }} onClick={() => setShowUpdateModal(true)}> Edit Post</Button>
+
+      {user?
+        user._id==userId?
+        <Button type="dash" block style={{ marginBottom: "10px" }} onClick={() => setShowUpdateModal(true)}> Edit Post</Button>:"":""} 
+      
 
       <Modal visible={showUptadeModal}
         footer={null}
@@ -42,6 +48,7 @@ const [showUptadeModal, setShowUpdateModal]=useState(false)
         onOk={() => setShowUpdateModal(false)}
         onCancel={() => setShowUpdateModal(false)}
       >
+        
         <UpdatePostForm title={title} summary={summary} comment={comment} _id={_id} />
 
       </Modal>

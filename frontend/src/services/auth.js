@@ -20,6 +20,9 @@ export const loginFn = userInfo =>
 export const updateUserFn= userInfo=>
   authService.put('/userUpdate', userInfo)
 
+export const userDetails= (_id) => 
+  authService.get(`/${_id}`)
+
 export const currentUserFn = () =>
   authService.get('/current-user')
 

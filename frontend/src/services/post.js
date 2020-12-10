@@ -3,7 +3,8 @@ import axios from 'axios'
 const prefix = '/posts'
 
 const baseURL = process.env.NODE_ENV === 'development' ?
-  `http://localhost:3000${prefix}` : `https://infinite-cove-99947.herokuapp.com${prefix}`
+  `http://localhost:3000${prefix}` : 
+  `https://infinite-cove-99947.herokuapp.com${prefix}`
 
 const postService = axios.create({
   baseURL,
@@ -12,16 +13,21 @@ const postService = axios.create({
 // export service-functions to target page
 
 // get all
-export const getUserPost = () => postService.get(`/allPosts`)
+export const getUserPost = () => 
+postService.get(`/allPosts`)
 
 // details
-export const getPostDetails = (_id) => postService.get(`/detail/${_id}`)
+export const getPostDetails = (_id) => 
+postService.get(`/detail/${_id}`)
 
 // create
-export const postcreate = data => postService.post('/create', data)
+export const postcreate = data => 
+postService.post('/create', data)
 
 // edit-update
-export const postUpdate = (id, post) => postService.put(`/edit/${id}`, post)
+export const postUpdate = (id, post) => 
+postService.put(`/edit/${id}`, post)
 
 //delete
-export const postDelete = id => postService.get(`/delete/${id}`)
+export const postDelete = id => 
+postService.get(`/delete/${id}`)

@@ -6,6 +6,7 @@ import Btc from './pages/Btc';
 import Ltc from './pages/Ltc';
 import Eth from './pages/Eth';
 import PostDetail from './pages/PostDetail';
+import PublicProfile from './pages/PublicProfile'
 import NotFound from './components/404/NotFound.js';
 import LayoutApp from './components/layoutApp'
 
@@ -33,6 +34,7 @@ const Router = () => (
       <Route component={Ltc} path='/ltc' />
       <Route component={Eth} path='/eth' />
       <Route component={PostDetail} path='/detail/:postId' />
+      <Route component={PublicProfile} path='/:userId' />
       <Route component={NotFound} />
     </Switch>
     </LayoutApp>

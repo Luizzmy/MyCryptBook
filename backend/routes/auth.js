@@ -7,6 +7,7 @@ const { signup,
     login, 
     logout, 
     currentUser,
+    userDetails,
     updateUser,
     googleInit, 
     googleCb 
@@ -30,6 +31,9 @@ router.get('/current-user', currentUser)
 
 //Update user
 router.put('/userUpdate', catchErrs(updateUser))
+
+//User details
+router.get("/:userId", catchErrs(userDetails))
 
 //Logout user
 router.get("/logout", logout);
