@@ -251,7 +251,7 @@ const menu = (
       <List.Item 
       
       actions={user? 
-        item.userId==user._id?
+        item.userId._id==user._id?
           [<a key="list-loadmore-edit" 
             onClick={() => [
               setShowEditModal(true), 
@@ -259,7 +259,7 @@ const menu = (
               }
             >edit</a>
           ]:
-          [<Text type="secondary"><b>written:</b><Link to={`/${item.userId._id}`}>{item.userId.name ? item.userId.name : ""}  </Link></Text>  ]:""}
+          [<Text type="secondary"><b>By:</b><Link to={`/${item.userId._id}`}>{item.userId.name ? item.userId.name : item.userId._id}  </Link></Text>  ]:""}
       >
             <List.Item.Meta
               avatar={
