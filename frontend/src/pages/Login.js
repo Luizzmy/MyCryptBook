@@ -26,7 +26,6 @@ const Login = ({ history }) => {
   async function handleSubmit(userInput) {
     const  data  = await loginFn(userInput)
     .then(data=>{
-      console.log(data)
       login({data})
       history.push('/')
       history.go(0)
@@ -34,7 +33,6 @@ const Login = ({ history }) => {
     })
     .catch(err=>{
       const errorInfo=err.response.data.message
-      console.log(errorInfo)
       errormessage(errorInfo)
     })
    

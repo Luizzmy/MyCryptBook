@@ -47,9 +47,6 @@ function Signup({ history }) {
       wrapperCol: { span: 16 },
     };
 
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo);
-    };
 
     return (
         <Row type="flex" justify="center" align="middle">
@@ -57,7 +54,7 @@ function Signup({ history }) {
         <Title level={1}>Signup</Title>
       <Divider />
       <div >
-        <Form layout="vertical" form={form} onFinish={handleSubmit} onFinishFailed={onFinishFailed} validateMessages={validateMessages}>
+        <Form layout="vertical" form={form} onFinish={handleSubmit} validateMessages={validateMessages}>
           <Form.Item name='email' label="Email:" rules={[{required:true, type:"email"}]}>
             <Input />
           </Form.Item>
