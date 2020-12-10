@@ -161,65 +161,66 @@ function Home() {
       </div>
 
       <Row>
-        <Col span={18} style={{ padding: "20px 0 0 30px", justifyContent: "center" }}>
-          {news ? <List
-            grid={{ lg: 1, xl: 2 }}
-            itemLayout="horizontal"
-            pagination={{
-              onChange: page => {
-              },
-              pageSize: 2,
-              showLessItems: true
-            }}
-            dataSource={news}
-            renderItem={i => (
-              <a href={i.link} target="_blank">
-                <List.Item>
-                  <Card
-                    key={i.id}
-                    hoverable
-                    style={{ width: "27.5rem", margin: "5px", height: "30rem" }}
-                    cover={<img alt="no picture" src={i.metaData.photo} style={{ height: "18rem", width: "offset" }} />}
-                  >
-                    <Title type="primary" style={{ fontSize: 20 }}>{i.headline}</Title>
-                    <Text type="secondary">{i.summary ? i.summary.length > 100 ?
-                      `${i.summary.substring(0, 100)}...` : i.summary : ""}</Text>
-                    <br />
-                    <Text type="secondary" style={{ fontSize: 10 }}><b>Source:</b> {i.provider}</Text>
-                  </Card>
-                </List.Item>
-              </a>
-            )}
-          /> : <LoadingOutlined style={{ fontSize: 24 }} spin />
-          }
-        </Col>
-        <Col span={6} style={{ padding: "15px 10px 30px 0", justifyContent: "left" }}>
-          <Title type="primary" style={{ textAlign: "right" }}>Latest Articles</Title>
-          {user ? posts ?
-            <List
-              itemLayout="vertical"
-              size="large"
-              dataSource={posts}
-              renderItem={i => (
-                <a href={`/detail/${i._id}`}>
-                  <List.Item
-                    key={i._id}
-                  >
-                    <List.Item.Meta
-                      title={i.title}
-                      description={i.comment}
-                      style={{ textAlign: "right" }}
-                    />
-                  </List.Item>
-                </a>
-              )}
-            /> : <LoadingOutlined style={{ fontSize: 24 }} spin />
-            : <div style={{ textAlign: "center" }}>
-              <br />
-              <Text type="primary">You need to be logged in to read any articles</Text>
-              <br />
-              <Text type="secondary">
-                <Link to={'/login'}>Login</Link>, or
+        <Col span={18} style={{padding:"20px 0 0 30px", justifyContent:"center"}}>
+      {news? <List
+      grid={{lg:1, xl:2}}
+      itemLayout="horizontal"
+      pagination={{
+            onChange: page => {
+            },
+            pageSize: 2,
+            showLessItems:true
+          }}
+          dataSource={news}
+          renderItem={i=>(
+            <a href={i.link}target="_blank">
+            <List.Item>
+              <Card
+      key={i.id}
+    hoverable
+    style={{ width: "27.5rem", margin:"5px", height:"30rem" }}
+    cover={<img alt="no picture" src={i.metaData.photo} style={{height:"18rem", width:"offset"}} />}
+  >
+                   <Title type="primary" style={{fontSize:20}}>{i.headline}</Title>
+    <Text type="secondary">{i.summary? i.summary.length>100?
+                   `${i.summary.substring(0,100)}...`:i.summary:""}</Text>
+                   <br/>
+                   <Text type="secondary" style={{fontSize:10}}><b>Source:</b> {i.provider}</Text>
+  </Card>
+  </List.Item>
+  </a>
+  )}
+  />:<LoadingOutlined style={{ fontSize: 24 }} spin />
+}
+  </Col>
+  <Col span={6} style={{padding:"15px 10px 30px 0", justifyContent:"left"}}>
+    <Title type="primary" style={{textAlign:"right"}}>Latest Articles</Title>
+    {user? posts? 
+    <List
+    itemLayout="vertical"
+    size="large"
+    dataSource={posts.slice(0,3)}
+    renderItem={i=>(
+      <a href={`/detail/${i._id}`}>
+      <List.Item
+      key={i._id}
+      >
+        <List.Item.Meta
+        title={i.title}
+        description={i.summary? i.summary.length>100?
+          `${i.summary.substring(0,100)}...`:i.summary:""}
+        style={{textAlign:"right"}}
+        />
+      </List.Item>
+      </a>
+    )}
+    />:<LoadingOutlined style={{ fontSize: 24 }} spin />
+    :    <div style={{textAlign:"center"}}>
+  <br/>
+  <Text type="primary">You need to be logged in to read any articles</Text>
+  <br/>
+  <Text type="secondary">
+    <Link to={'/login'}>Login</Link>, or 
     <Link to={'/signup'}> Signup</Link> if you don't have an account yet
   </Text>
 
