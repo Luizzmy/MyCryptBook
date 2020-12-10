@@ -55,14 +55,14 @@ const CreateRecomForm = ({ addRecom, curr }) => {
       <Form.Item name="title" label="Title:" rules={[{ required: true, }]}>
         <Input placeholder="E.g 1 day price objective" />
       </Form.Item>
-      <Form.Item placeholder="Price estimate" name="price estimate" label="Price estimate:" rules={[{ required: true, message: 'number required' }, { type: "number" },]}
+      <Form.Item placeholder="Price estimate" name="estimate" label="Price estimate:" rules={[{ required: true, message: 'number required' }, { type: "number" },]}
       >
         <InputNumber min={1} max={999999}
           formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           parser={value => value
             .replace(/\$\s?|(,*)/g, '')} />
       </Form.Item>
-      <Form.Item placeholder="Current price" name="actual price" label="Actual price:" rules={[{ required: true, message: 'number required' }, { type: "number" },]}>
+      <Form.Item placeholder="Current price" name="actual" label="Actual price:" rules={[{ required: true, message: 'number required' }, { type: "number" },]}>
         <InputNumber min={1} max={999999}
           formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           parser={value => value

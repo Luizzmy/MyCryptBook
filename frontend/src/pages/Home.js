@@ -189,7 +189,7 @@ function Home() {
     <List
     itemLayout="vertical"
     size="large"
-    dataSource={posts}
+    dataSource={posts.slice(0,3)}
     renderItem={i=>(
       <a href={`/detail/${i._id}`}>
       <List.Item
@@ -197,7 +197,8 @@ function Home() {
       >
         <List.Item.Meta
         title={i.title}
-        description={i.comment}
+        description={i.summary? i.summary.length>100?
+          `${i.summary.substring(0,100)}...`:i.summary:""}
         style={{textAlign:"right"}}
         />
       </List.Item>
