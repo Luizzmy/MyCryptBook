@@ -47,7 +47,6 @@ exports.getRecomDetail = async (req, res) => {
 
 // update
 exports.updateRecomendations = async (req, res) => {
-    console.log(req.params)
     const { recomendationId } = req.params
     const {
         title,

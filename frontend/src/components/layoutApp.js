@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Layout, Menu, Row, Col, Typography} from 'antd'
+import React from 'react'
+import { Layout, Menu, Row, Col} from 'antd'
 import { Link, useHistory } from 'react-router-dom'
 import { useContextData } from '../hooks/context'
 import { logoutFn } from '../services/auth'
@@ -38,9 +38,6 @@ function LayoutApp({ children }) {
               <Menu theme="dark" mode="horizontal" selectable={false}>
               <Menu.Item key="1" icon={<HomeOutlined/>}>
                 <Link to={'/'}></Link>
-                </Menu.Item>
-                <Menu.Item key="1" icon={<HomeOutlined />}>
-                  <Link to={'/'}></Link>
                 </Menu.Item>
                 <Menu.Item key="2">
                   <Link to='/btc'>BTC</Link>
@@ -85,7 +82,7 @@ function LayoutApp({ children }) {
         </Content>
 
         <Footer style={{ textAlign: 'center' }}>Created by <a href="https://github.com/Luizzmy" 
-        target="_blank">Gabriel Valenzuela</a> & Rubén Rodríguez</Footer> 
+        target="_blank" rel="noreferrer">Gabriel Valenzuela</a> & Rubén Rodríguez</Footer> 
 
       </Layout>
     </div>

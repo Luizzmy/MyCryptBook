@@ -6,18 +6,6 @@ const { Title } = Typography
 const googleUrl = process.env.NODE_ENV === 'development' ?
 "http://localhost:3000/auth/google" : '/auth/google'
 
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not a valid email!',
-    number: '${label} is not a valid number!'
-  },
-  number: {
-    range: '${Password} must be between ${3} and ${5}',
-  },
-
-
-};
 
 
 
@@ -42,10 +30,6 @@ function Signup({ history }) {
         history.push('/login'))
         
     }
-    const layout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 16 },
-    };
 
 
     return (
@@ -54,7 +38,7 @@ function Signup({ history }) {
         <Title level={1}>Signup</Title>
       <Divider />
       <div >
-        <Form layout="vertical" form={form} onFinish={handleSubmit} validateMessages={validateMessages}>
+        <Form layout="vertical" form={form} onFinish={handleSubmit} >
           <Form.Item name='email' label="Email:" rules={[{required:true, type:"email"}]}>
             <Input />
           </Form.Item>

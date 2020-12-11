@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Typography, Card, Button, Modal, Avatar } from 'antd'
-import { useContextData } from '../hooks/context'
-import { getUserPost } from '../services/post'
 import PostCard from '../components/PostCard'
 import { userDetails } from '../services/auth'
 import WriteEmail from '../components/writeEmail'
@@ -13,8 +11,6 @@ function PublicProfile({
     history
     }) {
 
-    const {user}=useContextData()
-
     const[showModal, setShowModal]=useState(false)
 
 
@@ -25,7 +21,6 @@ function PublicProfile({
         async function getUserD(){
             const {data}=await userDetails(userId)
             setUserP(data)
-            console.log(data)
         }
 
         getUserD()

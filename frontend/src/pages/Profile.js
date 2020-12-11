@@ -5,7 +5,6 @@ import { useContextData } from '../hooks/context'
 import { getUserPost } from '../services/post'
 import PostCard from '../components/PostCard'
 import CreatePostForm from '../components/createPostForm'
-import UpdatePostForm from '../components/UpdatePostForm'
 import EditProfile from '../components/editProfile'
 
 
@@ -16,7 +15,6 @@ const Profile = () => {
   const { user } = useContextData()
   let [posts, setPosts] = useState([])
   const [showModal, setShowModal] = useState(false)
-  const [showUptadeModal, setShowUpdateModal]=useState(false)
   const [showEditProfile, setShowEditProfile]=useState(false)
 
 
@@ -32,11 +30,9 @@ const Profile = () => {
     getPosts()
   }, [])
 
-  const postF = []
 
   function addPost(post) {
     setPosts([post, ...posts])
-    console.log(posts)
     setShowModal(false)
 
   }
@@ -77,7 +73,7 @@ const Profile = () => {
           <Button type="dash" block style={{ marginBottom: "10px" }} onClick={() => setShowModal(true)}> Write an article!</Button>
           {user? 
             posts ?  
-                posts.filter(post=> post.userId==user._id)
+                posts.filter(post=> post.userId===user._id)
                 .map(post => <PostCard key={post._id} {...post} />) : "loading":"loading"}
 
         </Card>

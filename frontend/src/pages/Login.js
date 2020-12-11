@@ -8,13 +8,6 @@ const { Title } = Typography
 const googleUrl = process.env.NODE_ENV === 'development' ?
   "http://localhost:3000/auth/google" : '/auth/google'
 
-  const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not a valid email!'
-    }
-  };
-
   const errormessage=(errmessage)=>{
     message.error(errmessage)
   }

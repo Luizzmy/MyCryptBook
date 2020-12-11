@@ -13,7 +13,6 @@ async (_,__, {id, name, emails, photos}, done)=>{
   const user=await User.findOne({googleID:id})
   
   if (!user){
-    console.log(user)
       const newUser=await User.create({
           googleID:id,
           email:emails[0].value,

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { LoadingOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import { Spin, Row, Col, List, Avatar, Typography, Button, Modal, Card, PageHeader, Statistic, Divider, Image } from 'antd';
+import { Row, Col, List, Typography, Card, Statistic, Image } from 'antd';
 import { useContextData } from '../hooks/context';
 import { getUserPost } from '../services/post'
 import { Link } from 'react-router-dom';
 
 //URLs for external APIs
 let newsURL = 'https://feed.cryptoquote.io/api/v1/news/headlines?key=778fae00-359b-11eb-a7c8-83b5e7f8291c'
-let priceURL = "https://rest.coinapi.io/v1/trades"
 let statsURL = "https://feed.cryptoquote.io/api/v1/stats"
 const { Text, Title } = Typography
-const { Meta } = Card;
 
 function Home() {
   //User context data
@@ -25,16 +23,11 @@ function Home() {
   const [ethereumP, setEthereumP] = useState(null)
   const [posts, setPosts] = useState(null)
 
-
-
-
-
   //useEffect hook for initial REST get API functions
   useEffect(() => {
 
     async function getNews() {
       const { data } = await axios.get(newsURL)
-      console.log(data)
       setNews(data)
     }
 
@@ -57,7 +50,6 @@ function Home() {
       const { data } = await getUserPost()
       setPosts(data.reverse()
         .slice(0, 4))
-      console.log(data)
     }
 
     const intervalId = setInterval(e => {
@@ -66,17 +58,12 @@ function Home() {
       getEthereumP()
 
 
-    }, 5000)
-
-
+    }, 500)
 
     getNews()
-
     getPosts()
-
     return _ => clearInterval(intervalId)
   }, [])
-
 
   return (
     <div>
@@ -173,13 +160,13 @@ function Home() {
             }}
             dataSource={news}
             renderItem={i => (
-              <a href={i.link} target="_blank">
+              <a href={i.link} target="_blank" rel="noreferrer">
                 <List.Item>
                   <Card
                     key={i.id}
                     hoverable
                     style={{ width: "27.5rem", margin: "5px", height: "30rem" }}
-                    cover={<img alt="no picture" src={i.metaData.photo} style={{ height: "18rem", width: "offset" }} />}
+                    cover={<img alt="newsPic" src={i.metaData.photo} style={{ height: "18rem", width: "offset" }} />}
                   >
                     <Title type="primary" style={{ fontSize: 20 }}>{i.headline}</Title>
                     <Text type="secondary">{i.summary ? i.summary.length > 100 ?
@@ -235,16 +222,11 @@ function Home() {
       <Row gutter={[16, 16]}>
         <Col span={8} >
           <Card >
-            {/* <Title type="primary">MyCryptBook</Title>
-            
-            <br />
-            <br /> */}
             <Image
               width={300}
               height={200}
               src="https://i1.wp.com/paxandpeace.com/wp-content/uploads/2019/12/AdobeStock_103422353.jpeg"
             />
-
             <Title type="primary">Suscríbete</Title>
             <Text type="secondary"> Descubre el mundo cripto. Aprende a usar bitcoin y otras criptomonedas.</Text>
             <br />

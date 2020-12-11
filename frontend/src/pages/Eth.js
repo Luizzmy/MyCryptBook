@@ -7,8 +7,8 @@ import {VictoryLine,
   VictoryLabel,
   VictoryVoronoiContainer,
   VictoryTooltip} from 'victory'
-import { Spin, Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, message, Space, Tooltip, DatePicker } from 'antd';
-import { LoadingOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, Space, Tooltip } from 'antd';
+import { LoadingOutlined, DownOutlined} from '@ant-design/icons';
 import { useContextData } from '../hooks/context';
 import EditRecomForm from '../components/EditRecomForm'
 
@@ -22,25 +22,6 @@ let newsURL='https://feed.cryptoquote.io/api/v1/news/headlines?search=ETH&key=77
 //Other const to be used in content of page
 const curr="ETH"
 const {Text}=Typography
-
-
-//Date fields need a paid version of the API used for prices, for now using the free version. 
-// let today=new Date()
-// let yesterday=new Date(today)
-// yesterday.setDate(yesterday.getDate()-1)
-
-// function convert(date){
-// let time_converted=date.getFullYear()+"-"+
-// (date.getMonth()<10? (('0'+date.getMonth()).substring(-2)):(date.getMonth()))+"-"+
-// (date.getDate()<10? (('0'+date.getDate()).substring(-2)):(date.getDate()))+"T"+
-// (date.getHours()<10? (('0'+date.getHours()).substring(-2)):(date.getHours()))+":"+
-// (date.getMinutes()<10? (('0'+date.getMinutes()).substring(-2)):(date.getMinutes()))+":"+
-// (date.getSeconds()<10? (('0'+date.getSeconds()).substring(-2)):(date.getSeconds()))
-// return time_converted
-// }
-
-// let time_end= convert(today)
-// let time_start=convert(yesterday)
 
 
 function Eth() {
@@ -72,8 +53,8 @@ function Eth() {
 //https://rest.coinapi.io/v1/ohlcv/GEMINI_SPOT_ETH_USD/history?period_id=1DAY&time_start=2016-01-01T00:00:00&time_end=2020-01-01T00:00:00
     
      async function geteEthereum(){
-       const {data}=await axios.
-       get(priceURL+period_id, 
+       const {data}=await axios
+       .get(priceURL+period_id, 
         {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
         
        seteEthereum(data.reverse())
@@ -86,15 +67,11 @@ function Eth() {
      }
      async function getRecoms(){
        const {data}=await getReco()
-       console.log(data)
-      //  setReco(data)
-       setRecoms(data.
-        filter(r=>r.crypto=="ETH")
+       setRecoms(data
+        .filter(r=>r.crypto==="ETH")
         .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1)
         .slice(0,3))
-
      }
-     
      geteEthereum()
      getNews()
      getRecoms()
@@ -117,8 +94,8 @@ function Eth() {
     //Load one more recom in the page
     async function onLoadMore(){
       const {data}=await getReco()
-       let rest=data.
-       filter(r=>r.crypto=="ETH")
+       let rest=data
+       .filter(r=>r.crypto==="ETH")
        .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1).slice(recoms.length-1)
        recoms.push(rest[0])
       setRecoms([...recoms])
@@ -136,11 +113,11 @@ function Eth() {
       <Button className onClick={onLoadMore}>More</Button>
     </div>)
 
+//UseEffect for rerendering new prices
     useEffect(() => {
       async function geteEthereum(period){
-        console.log(period)
-        const {data}=await axios.
-        get(priceURL+period, 
+        const {data}=await axios
+        .get(priceURL+period, 
          {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
          
         seteEthereum(data.reverse())
@@ -248,7 +225,7 @@ const menu = (
       <List.Item 
       
       actions={user? 
-        item.userId._id==user._id?
+        item.userId._id===user._id?
           [<a key="list-loadmore-edit" 
             onClick={() => [
               setShowEditModal(true), 
@@ -325,7 +302,7 @@ const menu = (
               }
             >
               <List.Item.Meta
-                title={<a href={item.link} target="_blank">{item.headline}</a>}
+                title={<a href={item.link} target="_blank" rel="noreferrer">{item.headline}</a>}
                 description={item.summary.length>100?
                    `${item.summary.substring(0,100)}...`:item.summary}
                    style={{textAlign:"right"}}

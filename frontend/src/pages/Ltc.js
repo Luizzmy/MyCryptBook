@@ -7,8 +7,8 @@ import {VictoryLine,
   VictoryLabel,
   VictoryVoronoiContainer,
   VictoryTooltip} from 'victory'
-import { Spin, Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, message, Space, Tooltip, DatePicker } from 'antd';
-import { LoadingOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, Space, Tooltip} from 'antd';
+import { LoadingOutlined, DownOutlined } from '@ant-design/icons';
 import { useContextData } from '../hooks/context';
 import EditRecomForm from '../components/EditRecomForm'
 
@@ -16,32 +16,11 @@ import CreateRecomForm from '../components/createRecomForm'
 import { Link } from 'react-router-dom';
 
 //URLs for APIs
-
 let newsURL='https://feed.cryptoquote.io/api/v1/news/headlines?search=LTC&key=778fae00-359b-11eb-a7c8-83b5e7f8291c'
 
 //Other const to be used in content of page
 const curr="LTC"
 const {Text}=Typography
-
-
-//Date fields need a paid version of the API used for prices, for now using the free version. 
-// let today=new Date()
-// let yesterday=new Date(today)
-// yesterday.setDate(yesterday.getDate()-1)
-
-// function convert(date){
-// let time_converted=date.getFullYear()+"-"+
-// (date.getMonth()<10? (('0'+date.getMonth()).substring(-2)):(date.getMonth()))+"-"+
-// (date.getDate()<10? (('0'+date.getDate()).substring(-2)):(date.getDate()))+"T"+
-// (date.gLTCours()<10? (('0'+date.gLTCours()).substring(-2)):(date.gLTCours()))+":"+
-// (date.getMinutes()<10? (('0'+date.getMinutes()).substring(-2)):(date.getMinutes()))+":"+
-// (date.getSeconds()<10? (('0'+date.getSeconds()).substring(-2)):(date.getSeconds()))
-// return time_converted
-// }
-
-// let time_end= convert(today)
-// let time_start=convert(yesterday)
-
 
 function Ltc() {
   let periodId="1HRS"
@@ -59,8 +38,6 @@ function Ltc() {
   //User context data
   const { user } = useContextData()
 
-  
-  
 
   let priceURL= 'https://rest-sandbox.coinapi.io/v1/ohlcv/GEMINI_SPOT_LTC_USD/latest?period_id='
   
@@ -69,11 +46,9 @@ function Ltc() {
    useEffect(()=>{
 
     
-//https://rest.coinapi.io/v1/ohlcv/GEMINI_SPOT_LTC_USD/history?period_id=1DAY&time_start=2016-01-01T00:00:00&time_end=2020-01-01T00:00:00
-    
      async function getLitecoin(){
-       const {data}=await axios.
-       get(priceURL+period_id, 
+       const {data}=await axios
+       .get(priceURL+period_id, 
         {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
         
        setLitecoin(data.reverse())
@@ -86,10 +61,8 @@ function Ltc() {
      }
      async function getRecoms(){
        const {data}=await getReco()
-       console.log(data)
-      //  setReco(data)
-       setRecoms(data.
-        filter(r=>r.crypto=="LTC")
+       setRecoms(data
+        .filter(r=>r.crypto==="LTC")
         .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1)
         .slice(0,3))
 
@@ -117,8 +90,8 @@ function Ltc() {
     //Load one more recom in the page
     async function onLoadMore(){
       const {data}=await getReco()
-       let rest=data.
-       filter(r=>r.crypto=="LTC")
+       let rest=data
+       .filter(r=>r.crypto==="LTC")
        .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1).slice(recoms.length-1)
        recoms.push(rest[0])
       setRecoms([...recoms])
@@ -138,9 +111,8 @@ function Ltc() {
 
     useEffect(() => {
       async function getLitecoin(period){
-        console.log(period)
-        const {data}=await axios.
-        get(priceURL+period, 
+        const {data}=await axios
+        .get(priceURL+period, 
          {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
          
         setLitecoin(data.reverse())
@@ -248,7 +220,7 @@ const menu = (
       <List.Item 
       
       actions={user? 
-        item.userId._id==user._id?
+        item.userId._id===user._id?
           [<a key="list-loadmore-edit" 
             onClick={() => [
               setShowEditModal(true), 
@@ -260,7 +232,6 @@ const menu = (
       >
             <List.Item.Meta
               avatar={
-                // <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 <Avatar size={80} src={item.userId ? item.userId.image : ""}/>
 
               }
@@ -325,7 +296,7 @@ const menu = (
               }
             >
               <List.Item.Meta
-                title={<a href={item.link} target="_blank">{item.headline}</a>}
+                title={<a href={item.link} target="_blank" rel="noreferrer">{item.headline}</a>}
                 description={item.summary.length>100?
                    `${item.summary.substring(0,100)}...`:item.summary}
                    style={{textAlign:"right"}}

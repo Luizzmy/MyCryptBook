@@ -22,7 +22,6 @@ const CreatePostForm = ({addPost}) => {
             image:img
         };
         const newPost = await postcreate(data)
-        .catch(e=> console.log(e.response));
         await addPost(newPost.data);
         form.resetFields()
         setImg(null)
@@ -64,7 +63,7 @@ const CreatePostForm = ({addPost}) => {
                 showUploadList={false}
                 beforeUpload={handleUploadFile}
             >
-            {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
+            {img ? <img src={img} alt="postPic" style={{ width: '100%' }} /> : uploadButton}
             </Upload>
             </Form.Item>
             <Form.Item 

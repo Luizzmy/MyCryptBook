@@ -15,13 +15,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 
-
-
-
-// testing routes
-// const Profile = () => <h1>profile</h1>
-
-
 const Router = () => (
   <BrowserRouter>
   <LayoutApp>

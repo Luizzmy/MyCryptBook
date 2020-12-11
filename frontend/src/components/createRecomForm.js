@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
-import { Form, Button, Input, InputNumber, Select, Upload } from "antd"
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
+import React from 'react'
+import { Form, Button, Input, InputNumber, Select} from "antd"
 import { recoCreate } from '../services/recomendation'
 
 const CreateRecomForm = ({ addRecom, curr }) => {
   //UseState and UseForm hooks
   const [form] = Form.useForm()
-  const [img, setImg]=useState(null)
-    const [loading, setLoading]=useState(null)
 
   //HandleSubmit for form
   async function handleSubmit(values) {
-    console.log(values)
     const recom = {
       ...values,
       crypto: curr
@@ -21,13 +17,6 @@ const CreateRecomForm = ({ addRecom, curr }) => {
     form.resetFields()
   }
 
-  //Upload Button setup
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
 
   //Rendered
   return (

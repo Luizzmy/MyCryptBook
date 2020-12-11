@@ -23,7 +23,6 @@ exports.login = async (req, res, next) => {
         .json({ message: 'Something went wrong ' })
     }
     if (!user) {
-      console.log(failureDetails)
       return res.status(401).json(failureDetails)
     }
     req.login(user, err => {
