@@ -3,6 +3,7 @@ import { postUpdate, postDelete } from '../services/post'
 import { Form, Button, Input, Upload } from 'antd'
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 //Cloudinary URL
 const cloudinaryAPI= 'https://api.cloudinary.com/v1_1/devykcsdg/image/upload'
@@ -14,17 +15,17 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
     const [form] = Form.useForm()
     const [img, setImg]=useState(null)
     const [loading, setLoading]=useState(null)
+    const history = useHistory()
 
     //HandleSubmit for form
     async function handleSubmit(values) {
-        console.log(values)
         const postUpdated={
             ...values,
             image:img
         }
         const {data:newPost}=await postUpdate(_id, postUpdated)
         setImg(null)
-        refreshPage()
+        history.push('/')
     }
 
     //HandleUpload for cloudinary Image

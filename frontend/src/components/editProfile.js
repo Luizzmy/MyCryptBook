@@ -4,6 +4,7 @@ import {LoadingOutlined, PlusOutlined} from '@ant-design/icons'
 import { updateUserFn} from '../services/auth'
 import { useContextData } from '../hooks/context'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 // Cloudinary URL
 const cloudinaryAPI= 'https://api.cloudinary.com/v1_1/devykcsdg/image/upload'
@@ -15,6 +16,7 @@ function EditProfile() {
     const user=useContextData()
     const [img, setImg]=useState(null)
     const [loading, setLoading]=useState(null)
+    const history = useHistory()
 
     const [form]=Form.useForm()
 
@@ -26,7 +28,7 @@ function EditProfile() {
         }
         const {data:newUser}= await updateUserFn(userUpdated)
         setImg(null)
-        refreshPage()
+        history.push('/')
     }
 
     //HandleUploadFile for image upload to cloudinary

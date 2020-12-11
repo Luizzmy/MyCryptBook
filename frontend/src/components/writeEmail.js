@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Button, Input} from 'antd'
 import { useContextData } from '../hooks/context'
 import {sendEmail} from '../services/auth'
+import { useHistory } from 'react-router-dom'
 
 
 function WriteEmail({userP}) {
@@ -9,12 +10,13 @@ function WriteEmail({userP}) {
     //Context and Useform
     const {user}=useContextData()
     const [form] = Form.useForm()
+    const history = useHistory()
 
     //HandleSubmit of form
     async function handleSubmit(values) {
         const email=values
         await sendEmail(userP._id, email)
-        refreshPage()
+        history.push('/')
     }
     const refreshPage = ()=>{
         window.location.reload();

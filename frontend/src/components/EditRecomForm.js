@@ -1,9 +1,11 @@
 import React from 'react'
 import {Form, Button, Input, InputNumber, Select} from "antd"
 import {recoDelete, recoUpdate} from '../services/recomendation'
-
+import { useHistory } from 'react-router-dom'
 
 function EditRecomForm({item, curr}) {
+
+  const history = useHistory()
     
   //useForm para formulario
   const [form]=Form.useForm()
@@ -15,7 +17,7 @@ function EditRecomForm({item, curr}) {
             crypto:curr
         }
         const {data:newRecom}= await recoUpdate(item._id, recomUpdated)
-        refreshPage()
+        history.push('/')
     }
 
     const refreshPage = ()=>{
@@ -25,7 +27,7 @@ function EditRecomForm({item, curr}) {
    //HandleDelete for form
     async function handleDelete(){
       await recoDelete(item._id)
-      refreshPage()
+      history.push('/')
     }
 
     //Rendered
