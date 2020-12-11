@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const baseURL = process.env.NODE_ENV === 'development' ?
-"http://localhost:3000/" :'https://infinite-cove-99947.herokuapp.com/'
+"http://localhost:3000/" :'https://infinite-cove-99947.herokuapp.com/' || 'http://infinite-cove-99947.herokuapp.com/'
 
   // /routes/auth
 

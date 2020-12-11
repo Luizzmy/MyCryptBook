@@ -25,7 +25,7 @@ const app = express();
 //cors auth for frontend
 app.use(
   cors({
-    origin: ['http://localhost:3001'],
+    origin: ['https://infinite-cove-99947.herokuapp.com', 'http://infinite-cove-99947.herokuapp.com', 'http://localhost:3001'],
   credentials: true
   })
 );
