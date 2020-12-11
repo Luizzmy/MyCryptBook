@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { LoadingOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import { Spin, Row, Col, List, Avatar, Typography, Button, Modal, Card, PageHeader, Statistic, Divider } from 'antd';
+import { Spin, Row, Col, List, Avatar, Typography, Button, Modal, Card, PageHeader, Statistic, Divider, Image } from 'antd';
 import { useContextData } from '../hooks/context';
 import { getUserPost } from '../services/post'
 import { Link } from 'react-router-dom';
@@ -66,7 +66,7 @@ function Home() {
       getEthereumP()
 
 
-    },5000)
+    }, 5000)
 
 
 
@@ -161,66 +161,66 @@ function Home() {
       </div>
 
       <Row>
-        <Col span={18} style={{padding:"20px 0 0 30px", justifyContent:"center"}}>
-      {news? <List
-      grid={{lg:1, xl:2}}
-      itemLayout="horizontal"
-      pagination={{
-            onChange: page => {
-            },
-            pageSize: 2,
-            showLessItems:true
-          }}
-          dataSource={news}
-          renderItem={i=>(
-            <a href={i.link}target="_blank">
-            <List.Item>
-              <Card
-      key={i.id}
-    hoverable
-    style={{ width: "27.5rem", margin:"5px", height:"30rem" }}
-    cover={<img alt="no picture" src={i.metaData.photo} style={{height:"18rem", width:"offset"}} />}
-  >
-                   <Title type="primary" style={{fontSize:20}}>{i.headline}</Title>
-    <Text type="secondary">{i.summary? i.summary.length>100?
-                   `${i.summary.substring(0,100)}...`:i.summary:""}</Text>
-                   <br/>
-                   <Text type="secondary" style={{fontSize:10}}><b>Source:</b> {i.provider}</Text>
-  </Card>
-  </List.Item>
-  </a>
-  )}
-  />:<LoadingOutlined style={{ fontSize: 24 }} spin />
-}
-  </Col>
-  <Col span={6} style={{padding:"15px 10px 30px 0", justifyContent:"left"}}>
-    <Title type="primary" style={{textAlign:"right"}}>Latest Articles</Title>
-    {user? posts? 
-    <List
-    itemLayout="vertical"
-    size="large"
-    dataSource={posts.slice(0,3)}
-    renderItem={i=>(
-      <a href={`/detail/${i._id}`}>
-      <List.Item
-      key={i._id}
-      >
-        <List.Item.Meta
-        title={i.title}
-        description={i.summary? i.summary.length>100?
-          `${i.summary.substring(0,100)}...`:i.summary:""}
-        style={{textAlign:"right"}}
-        />
-      </List.Item>
-      </a>
-    )}
-    />:<LoadingOutlined style={{ fontSize: 24 }} spin />
-    :    <div style={{textAlign:"center"}}>
-  <br/>
-  <Text type="primary">You need to be logged in to read any articles</Text>
-  <br/>
-  <Text type="secondary">
-    <Link to={'/login'}>Login</Link>, or 
+        <Col span={18} style={{ padding: "20px 0 0 30px", justifyContent: "center" }}>
+          {news ? <List
+            grid={{ lg: 1, xl: 2 }}
+            itemLayout="horizontal"
+            pagination={{
+              onChange: page => {
+              },
+              pageSize: 2,
+              showLessItems: true
+            }}
+            dataSource={news}
+            renderItem={i => (
+              <a href={i.link} target="_blank">
+                <List.Item>
+                  <Card
+                    key={i.id}
+                    hoverable
+                    style={{ width: "27.5rem", margin: "5px", height: "30rem" }}
+                    cover={<img alt="no picture" src={i.metaData.photo} style={{ height: "18rem", width: "offset" }} />}
+                  >
+                    <Title type="primary" style={{ fontSize: 20 }}>{i.headline}</Title>
+                    <Text type="secondary">{i.summary ? i.summary.length > 100 ?
+                      `${i.summary.substring(0, 100)}...` : i.summary : ""}</Text>
+                    <br />
+                    <Text type="secondary" style={{ fontSize: 10 }}><b>Source:</b> {i.provider}</Text>
+                  </Card>
+                </List.Item>
+              </a>
+            )}
+          /> : <LoadingOutlined style={{ fontSize: 24 }} spin />
+          }
+        </Col>
+        <Col span={6} style={{ padding: "15px 10px 30px 0", justifyContent: "left" }}>
+          <Title type="primary" style={{ textAlign: "right" }}>Latest Articles</Title>
+          {user ? posts ?
+            <List
+              itemLayout="vertical"
+              size="large"
+              dataSource={posts.slice(0, 3)}
+              renderItem={i => (
+                <a href={`/detail/${i._id}`}>
+                  <List.Item
+                    key={i._id}
+                  >
+                    <List.Item.Meta
+                      title={i.title}
+                      description={i.summary ? i.summary.length > 100 ?
+                        `${i.summary.substring(0, 100)}...` : i.summary : ""}
+                      style={{ textAlign: "right" }}
+                    />
+                  </List.Item>
+                </a>
+              )}
+            /> : <LoadingOutlined style={{ fontSize: 24 }} spin />
+            : <div style={{ textAlign: "center" }}>
+              <br />
+              <Text type="primary">You need to be logged in to read any articles</Text>
+              <br />
+              <Text type="secondary">
+                <Link to={'/login'}>Login</Link>, or
     <Link to={'/signup'}> Signup</Link> if you don't have an account yet
   </Text>
 
@@ -229,6 +229,61 @@ function Home() {
         </Col>
       </Row>
       <Row>
+
+      </Row>
+      <br />
+      <Row gutter={[16, 16]}>
+        <Col span={8} >
+          <Card >
+            {/* <Title type="primary">MyCryptBook</Title>
+            
+            <br />
+            <br /> */}
+            <Image
+              width={300}
+              height={200}
+              src="https://i1.wp.com/paxandpeace.com/wp-content/uploads/2019/12/AdobeStock_103422353.jpeg"
+            />
+
+            <Title type="primary">Suscríbete</Title>
+            <Text type="secondary"> Descubre el mundo cripto. Aprende a usar bitcoin y otras criptomonedas.</Text>
+            <br />
+            <br />
+            <Link to='/signup'>Crea tu cuenta aquí</Link>
+            <br/>
+            <br/>
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card >
+          <Image
+              width={300}
+              height={200}
+              src="https://blogs.airdropalert.com/wp-content/uploads/2019/01/as_nl_4_2.jpg"
+            />
+            <Title type="primary">Entra en nuestra comunidad</Title>
+            <Text type="primary">Comparte recomendaciónes, haz crecer la comunidad crypto!</Text>
+            <br />
+            <Link to='/btc'>Haz tu recomendaciónes</Link>
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card >
+          <Image
+              width={300}
+              height={200}
+              src="https://coinrevolution.com/wp-content/uploads/2020/07/crypto-news.jpg"
+            />
+            <Title type="primary">MyCryptBook</Title>
+            <Text type="primary">Las noticias y análisis que necesitas en MyCryptBook. 
+              
+            <br/> Aprende sobre bitcoin y otras criptomonedas.
+            <br/>Hacemos de las cripto algo sencillo</Text>
+            <br />
+            <br />
+            
+          </Card>
+        </Col>
 
       </Row>
 
