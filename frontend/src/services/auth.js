@@ -25,6 +25,9 @@ export const userDetails= (_id) =>
 
 export const currentUserFn = () =>
   authService.get('/current-user')
+  
+export const sendEmail = (_id, email) =>
+  authService.post(`/sendEmail/${_id}`, email)
 
 export const logoutFn = () =>
   authService.get('/logout')

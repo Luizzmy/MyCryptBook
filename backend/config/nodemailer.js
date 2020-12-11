@@ -31,3 +31,28 @@ exports.userRegister=(name, email)=>{
         `
     })
 }
+
+exports.userContact=(userName, senderName, email, sender, body, budget)=>{
+
+  return transporter.sendMail({
+    from: 'MyCryptBook',
+    to: [email,sender],
+    subject: `${senderName} wants to get in touch with you send a reply!`,
+    html:
+    `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Rent-a-Chef</title>
+    </head>
+    <body>
+      <h1 class="title">Hi! ${userName}, the user ${senderName} wants to get in touch with you! send a reply to this email: ${sender}!</h1>
+      <br/>
+      <h4 class="body">${body}</h4>
+    </body>
+    </html>
+    `
+  })
+}

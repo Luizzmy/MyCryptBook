@@ -3,7 +3,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 // const router = require('../routes/auth')
-const {userRegister}=require('../config/nodemailer')
+const {userRegister, userContact}=require('../config/nodemailer')
 
 exports.signup = async (req, res) => {
   const newUser= await User.register(req.body, req.body.password, function(err){
@@ -87,6 +87,17 @@ exports.updateUser= async (req,res)=>{
     image
   }, {new: true})
   res.status(200).json(updateUser)
+}
+
+exports.sendEmail=async (req,res)=>{
+  const {sender, email, body}=req.body
+  const {name}=req.user
+  const {userId}=req.params
+  const user= await User.findById(userId)
+  senderName=name
+  const userName=user.name
+  await userContact(userName, senderName, email, sender, body)
+  res.status(200).json({message:"email sent"})
 }
 
 exports.googleInit = passport.authenticate('google', {
