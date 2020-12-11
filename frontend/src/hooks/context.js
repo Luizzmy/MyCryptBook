@@ -28,7 +28,7 @@ export const DataCtxProvider = props => {
     const value = { user, login, logout, addProfilePic }
 
     return (
-        // DataContext.Provider??? 
+        // DataContext.Provider
         <DataContext.Provider {...props} value={value} />
     )
 }

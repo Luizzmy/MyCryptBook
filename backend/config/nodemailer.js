@@ -32,6 +32,8 @@ exports.userRegister=(name, email)=>{
     })
 }
 
+
+//Get in touch with user
 exports.userContact=(userName, senderName, email, sender, body, budget)=>{
 
   return transporter.sendMail({

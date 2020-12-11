@@ -2,21 +2,6 @@ const Recomendation = require('../models/Recomendations');
 const User = require('../models/User');
 
 
-//Get Recommendations by crypto for showing... missing filtering by crypt, might just filter on the frontend 
-//   exports.getcryptoRecomendations = async (req, res) => {
-//       const recomsFiltered={
-//           'BTC':[],
-//           'XRP':[],
-//           'ETH':[]
-//       }
-//       const { crypt } = req.params
-//       const { recomendations } = await Recomendation.find()
-//       recomendations.forEach(recomendation=>{
-//           recomendationsFiltered
-//       })
-//       res.status(200).json(recomendations)
-//   }
-
 // Get all recommendations
 exports.allRecommendations = async (req, res) => {
     const recomendations = await  Recomendation.find().populate('userId')
@@ -82,6 +67,8 @@ exports.updateRecomendations = async (req, res) => {
     res.status(200).json(updatedRecomendation)
 }
 
+
+//Delete recom
  exports.deleteRecomendation = async (req, res) => {
      const { recomendationId } = req.params
      await Recomendation.findByIdAndDelete(recomendationId)

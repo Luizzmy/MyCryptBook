@@ -30,9 +30,6 @@ router.get('/allUserRecoms', isAuth, catchErrs(getAllUserRecoms))
 //Recom Details
 router.get('/detail/:recomendationId', isAuth, catchErrs(getRecomDetail))
 
-//List All Crypto Recomendations
-// router.get('/:crypt/recommendations', isAuth, catchErrs())
-
 //Delete Recomendation
 router.get('/delete/:recomendationId', isAuth, catchErrs(deleteRecomendation))
 

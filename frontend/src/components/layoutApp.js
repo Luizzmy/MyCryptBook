@@ -5,22 +5,26 @@ import { useContextData } from '../hooks/context'
 import { logoutFn } from '../services/auth'
 import {HomeOutlined} from '@ant-design/icons'
 
-
+//App Layout
 const { Header, Content, Footer } = Layout
+
+
 function LayoutApp({ children }) {
+
+  //Context and useStory hooks
   const { user, logout } = useContextData()
 
   let history=useHistory()
 
+  //HandleLogout
   async function handleLogout() {
     history.push('/')
     await logoutFn()
-    
     logout()
-    
   }
 
 
+  //Rendered
   return (
     <div>
       <Layout className="layout">
@@ -29,11 +33,9 @@ function LayoutApp({ children }) {
           <Row>
             <Col span={12}>
               <Menu theme="dark" mode="horizontal" selectable={false}>
-              
               <Menu.Item key="1" icon={<HomeOutlined/>}>
                 <Link to={'/'}></Link>
                 </Menu.Item>
-              
                 <Menu.Item key="2">
                   <Link to='/btc'>BTC</Link>
                 </Menu.Item>
@@ -74,7 +76,8 @@ function LayoutApp({ children }) {
         <Content style={{ padding: '10px 20px' }}>
           <div className="site-layout-content">{children}</div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Created by <a href="https://github.com/Luizzmy" target="_blank">Gabriel Valenzuela</a> & Rubén Rodríguez</Footer> 
+        <Footer style={{ textAlign: 'center' }}>Created by <a href="https://github.com/Luizzmy" 
+        target="_blank">Gabriel Valenzuela</a> & Rubén Rodríguez</Footer> 
       </Layout>
     </div>
   )
