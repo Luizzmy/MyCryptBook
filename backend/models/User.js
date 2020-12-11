@@ -12,10 +12,10 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref:"Post"
     }],
-    followers:[{
+    followers:[{    ///For future implementation
       type: Schema.Types.ObjectId,
       ref:'User'
-    }]
+    }]   
   },
   {
     timestamps: true,

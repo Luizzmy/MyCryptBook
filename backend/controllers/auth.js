@@ -1,24 +1,20 @@
 
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
 const passport = require('passport');
-// const router = require('../routes/auth')
 const {userRegister, userContact}=require('../config/nodemailer')
 
+//Signup controller, create user
 exports.signup = async (req, res) => {
   const newUser= await User.register(req.body, req.body.password, function(err){
     if(err){
       res.status(501).json({message:'There was an error while registering please try again with a different email or password'})
     }
   })
-  //const password=null
   await userRegister(req.body.name, req.body.email)
   res.status(201).json(newUser)
 }
 
-
-
-
+//Login process
 exports.login = async (req, res, next) => {
   passport.authenticate('local', (err, user, failureDetails) => {
     if (err) {
@@ -30,9 +26,6 @@ exports.login = async (req, res, next) => {
       console.log(failureDetails)
       return res.status(401).json(failureDetails)
     }
-
-
-
     req.login(user, err => {
       if (err) {
         return res
@@ -45,36 +38,32 @@ exports.login = async (req, res, next) => {
   })(req, res, next)
 }
 
+//Check of current logged user
 exports.currentUser = (req, res) => {
   res.json(req.user || null)
 }
 
+//Get user details for public profile
 exports.userDetails = async (req, res) =>{
   const {userId}=req.params
   const user=await User.findById(userId).populate('posts')
-
   res.status(200).json(user)
-
 }
 
+//Logout user
 exports.logout = (req, res) => {
   req.logout()
   res.status(200).json({ message: 'logged out' })
 }
 
-exports.test=(req,res)=>{
-  console.log("hola")
-  res.status(200)
-}
-
+//Update User details
 exports.updateUser= async (req,res)=>{
   const id=req.user._id
   const {email, 
     name, 
     lastname, 
-    //password, need to double check how to update password with the plugin 
     image}=req.body
-  if(!email /*|| !password*/){
+  if(!email){
     return res
     .status(403)
     .json({message:"Email field cannot be empty"})
@@ -83,12 +72,12 @@ exports.updateUser= async (req,res)=>{
     email,
     name,
     lastname,
-    //password,
     image
   }, {new: true})
   res.status(200).json(updateUser)
 }
 
+//Contact user by email
 exports.sendEmail=async (req,res)=>{
   const {sender, email, body}=req.body
   const {name}=req.user
@@ -100,6 +89,8 @@ exports.sendEmail=async (req,res)=>{
   res.status(200).json({message:"email sent"})
 }
 
+
+/*-----------------------Google login process--------------------*/
 exports.googleInit = passport.authenticate('google', {
   scope: [
     "https://www.googleapis.com/auth/userinfo.profile",

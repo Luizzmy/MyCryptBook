@@ -21,6 +21,8 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
+
+//cors auth for frontend
 app.use(
   cors({
     origin: ['http://localhost:3001'],
@@ -49,6 +51,7 @@ app.use(logger('dev'));
 app.use(express.static('public/build'))
 
 
+//Prefixes and routes declarations
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const post=require('./routes/post')
@@ -60,7 +63,7 @@ app.use('/recoms', recoms)
 
 
 
-// Uncomment this line for production
+// Production route
 app.get('*', (req, res) => res.sendFile(`${__dirname}/public/build/index.html`));
 
 module.exports = app;

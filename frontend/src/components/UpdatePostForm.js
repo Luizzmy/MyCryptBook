@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import { postUpdate, postDelete } from '../services/post'
 import { Form, Button, Input, Modal, Upload } from 'antd'
-import { useHistory } from 'react-router-dom'
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons'
 import axios from 'axios'
 
+//Cloudinary URL
 const cloudinaryAPI= 'https://api.cloudinary.com/v1_1/devykcsdg/image/upload'
 
 
 const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
     
+    //Initial Hooks
     const [form] = Form.useForm()
-    const history = useHistory()
     const [img, setImg]=useState(null)
     const [loading, setLoading]=useState(null)
 
+    //HandleSubmit for form
     async function handleSubmit(values) {
-        console.log(_id)
         const postUpdated={
             ...values,
             image:img
         }
-      
         const {data:newPost}=await postUpdate(_id, postUpdated)
-        
         setImg(null)
         refreshPage()
-
     }
 
+    //HandleUpload for cloudinary Image
     async function handleUploadFile(file) {
         setLoading(true)
         const data = new FormData()
-    
         data.append('file', file)
         data.append('upload_preset','uploadcrypto')
-        
-    
         const { data: { secure_url } } = await axios.post(cloudinaryAPI, data)
-    
         setImg(secure_url);
         setLoading(false)
       }
@@ -47,6 +41,7 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
       window.location.reload();
    }
 
+   //Upload Button setup
    const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -55,12 +50,13 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
   );
 
 
+  //Handle Delete
     async function handleDelete() {
         await postDelete(_id)
-        refreshPage() //place to go.
+        refreshPage()
     }
 
-
+//Rendered
     return (
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
             <Form.Item name="Title" label='Title:' initialValue={title} rules={[{required:true, }]}>
@@ -81,15 +77,10 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
             <Form.Item name="Comment" label="Comment:" initialValue={comment} rules={[{required:true, }]}>
             <Input.TextArea rows={5}/>
             </Form.Item>
-
             <Button type="primary" htmlType="submit" block>Edit post</Button>
             <br />
             <br />
             <Button type="ghost" onClick={handleDelete} danger block>Delete post</Button>
-
-
-
-
         </Form>
     )
 }

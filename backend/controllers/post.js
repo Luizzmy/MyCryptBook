@@ -16,7 +16,7 @@ exports.getAllUserPosts = async (req, res) => {
     res.status(200).json(posts)
 }
 
-// View
+// View Post Details
 exports.getPostDetail = async (req, res) => {
     const { postId } = req.params
     const post = await Post.findById(postId).populate('userId')
@@ -24,7 +24,7 @@ exports.getPostDetail = async (req, res) => {
     res.status(200).json(post)
 }
 
-// create
+// Create Post
 exports.createPost = async (req, res) => {
     const { title,
         summary,
@@ -51,7 +51,7 @@ exports.createPost = async (req, res) => {
     res.status(201).json(newPost)
 }
 
-// update
+// Update a post
 exports.updatePost = async (req, res) => {
     const { postId } = req.params
     const { title,
@@ -79,7 +79,7 @@ exports.updatePost = async (req, res) => {
 
 
 
-// delete
+// Delete post
 exports.deletePost = async (req, res) => {
     const { postId } = req.params
     await Post.findByIdAndDelete(postId)
