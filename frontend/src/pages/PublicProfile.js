@@ -56,7 +56,7 @@ function PublicProfile({
         onOk={() => setShowModal(false)}
         onCancel={() => setShowModal(false)}
       >
-        <WriteEmail/>
+        <WriteEmail userP={userP}/>
       </Modal>
         </Card>
             </Col>
