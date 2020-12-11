@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Button, Input, InputNumber, Select, Upload} from "antd"
+import {Form, Button, Input, InputNumber, Select} from "antd"
 import {recoDelete, recoUpdate} from '../services/recomendation'
 
 

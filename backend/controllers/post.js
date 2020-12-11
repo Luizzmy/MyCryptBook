@@ -12,7 +12,6 @@ exports.allPosts = async (req, res) => {
 exports.getAllUserPosts = async (req, res) => {
     const userId = req.user._id
     const { posts } = await User.findById(userId).populate('posts')
-    console.log(posts)
     res.status(200).json(posts)
 }
 

@@ -11,14 +11,12 @@ function PostDetail({
     }) {
 
     const [postD, setPostD]=useState(null)
-    console.log(postD)
 
      useEffect(()=>{
          
          async function getDetails(){
          const {data}=await getPostDetails(postId) 
          setPostD(data)
-         console.log(data)
          }
 
        getDetails()  

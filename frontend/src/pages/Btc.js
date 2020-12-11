@@ -7,8 +7,8 @@ import {VictoryLine,
   VictoryLabel,
   VictoryVoronoiContainer,
   VictoryTooltip} from 'victory'
-import { Spin, Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, message, Space, Tooltip, DatePicker } from 'antd';
-import { LoadingOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Row, Col,List, Avatar, Typography, Button, Modal, Menu, Dropdown, Space, Tooltip} from 'antd';
+import { LoadingOutlined, DownOutlined } from '@ant-design/icons';
 import { useContextData } from '../hooks/context';
 import EditRecomForm from '../components/EditRecomForm'
 
@@ -22,25 +22,6 @@ let newsURL='https://feed.cryptoquote.io/api/v1/news/headlines?search=BTC&key=77
 //Other const to be used in content of page
 const curr="BTC"
 const {Text}=Typography
-
-
-//Date fields need a paid version of the API used for prices, for now using the free version. 
-// let today=new Date()
-// let yesterday=new Date(today)
-// yesterday.setDate(yesterday.getDate()-1)
-
-// function convert(date){
-// let time_converted=date.getFullYear()+"-"+
-// (date.getMonth()<10? (('0'+date.getMonth()).substring(-2)):(date.getMonth()))+"-"+
-// (date.getDate()<10? (('0'+date.getDate()).substring(-2)):(date.getDate()))+"T"+
-// (date.getHours()<10? (('0'+date.getHours()).substring(-2)):(date.getHours()))+":"+
-// (date.getMinutes()<10? (('0'+date.getMinutes()).substring(-2)):(date.getMinutes()))+":"+
-// (date.getSeconds()<10? (('0'+date.getSeconds()).substring(-2)):(date.getSeconds()))
-// return time_converted
-// }
-
-// let time_end= convert(today)
-// let time_start=convert(yesterday)
 
 
 function BTC() {
@@ -67,13 +48,9 @@ function BTC() {
 
   //useEffect hook for initial REST get API functions
    useEffect(()=>{
-
-    
-//https://rest.coinapi.io/v1/ohlcv/GEMINI_SPOT_BTC_USD/history?period_id=1DAY&time_start=2016-01-01T00:00:00&time_end=2020-01-01T00:00:00
-    
      async function getBitcoin(){
-       const {data}=await axios.
-       get(priceURL+period_id, 
+       const {data}=await axios
+       .get(priceURL+period_id, 
         {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
         
        setBitcoin(data.reverse())
@@ -86,10 +63,8 @@ function BTC() {
      }
      async function getRecoms(){
        const {data}=await getReco()
-       console.log(data)
-      //  setReco(data)
-       setRecoms(data.
-        filter(r=>r.crypto=="BTC")
+       setRecoms(data
+        .filter(r=>r.crypto==="BTC")
         .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1)
         .slice(0,3))
 
@@ -117,8 +92,8 @@ function BTC() {
     //Load one more recom in the page
     async function onLoadMore(){
       const {data}=await getReco()
-       let rest=data.
-       filter(r=>r.crypto=="BTC")
+       let rest=data
+       .filter(r=>r.crypto==="BTC")
        .sort((a,b)=>(a.createdAt<b.createdAt)?1:-1).slice(recoms.length-1)
        recoms.push(rest[0])
       setRecoms([...recoms])
@@ -136,11 +111,11 @@ function BTC() {
       <Button className onClick={onLoadMore}>More</Button>
     </div>)
 
+    //UseEffect for rerendering new prices
     useEffect(() => {
       async function getBitcoin(period){
-        console.log(period)
-        const {data}=await axios.
-        get(priceURL+period, 
+        const {data}=await axios
+        .get(priceURL+period, 
          {headers:{'X-CoinAPI-Key': "977F32DF-8B2A-4AB3-B2EC-6997426FE65D" }})
          
         setBitcoin(data.reverse())
@@ -153,7 +128,6 @@ function handleMenuClick(e) {
   setPeriod(e.key)
   setChanged(true)
 }
-
 
 const menu = (
   <Menu onClick={handleMenuClick}>
@@ -184,7 +158,6 @@ const menu = (
   </Menu>
 );
   
-
   //Div rendered in the page
   return (
     <div>
@@ -249,9 +222,8 @@ const menu = (
       dataSource={recoms}
       renderItem={item => (
       <List.Item 
-      
       actions={user? 
-        item.userId._id==user._id?
+        item.userId._id===user._id?
           [<a key="list-loadmore-edit" 
             onClick={() => [
               setShowEditModal(true), 
@@ -259,22 +231,18 @@ const menu = (
               }
             >edit</a>
           ]:
-          [<Text type="secondary"><b>By:</b><Link to={`/${item.userId._id}`}>{item.userId.name ? item.userId.name : item.userId._id}  </Link></Text>  ]:""}
+          [<Text type="secondary"><b>By:</b>
+          <Link to={`/${item.userId._id}`}>
+            {item.userId.name ? item.userId.name : item.userId._id}  </Link></Text>  ]:""}
       >
             <List.Item.Meta
               avatar={
-                // <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 <Avatar size={80} src={item.userId ? item.userId.image : ""}/>
-
               }
               title={item.title}
               description={`Created: ${item.createdAt.slice(5,16)} | Estimate: ${item.estimate} | Actual: ${item.actual} | Surprise: ${item.surprise}`}
             />
-            <p>Recomendation: {item.recomendation}</p>
-            
-           
-
-    
+            <p>Recomendation: {item.recomendation}</p>    
         </List.Item>
       )
     } 
@@ -287,9 +255,9 @@ const menu = (
       <Link to={'/login'}>Login</Link>, or 
       <Link to={'/signup'}>Signup</Link> if you don't have an account yet
     </Text>
-
     </div>
   }
+
     {/*-----Modal for editing recomendation (only available for recom creator)-----*/}
       <Modal
         visible={showEditModal}
@@ -328,7 +296,7 @@ const menu = (
               }
             >
               <List.Item.Meta
-                title={<a href={item.link} target="_blank">{item.headline}</a>}
+                title={<a href={item.link} target="_blank" rel="noreferrer">{item.headline}</a>}
                 description={item.summary.length>100?
                    `${item.summary.substring(0,100)}...`:item.summary}
                    style={{textAlign:"right"}}

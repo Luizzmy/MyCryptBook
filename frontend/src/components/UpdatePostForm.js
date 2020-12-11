@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { postUpdate, postDelete } from '../services/post'
-import { Form, Button, Input, Modal, Upload } from 'antd'
+import { Form, Button, Input, Upload } from 'antd'
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons'
 import axios from 'axios'
 
@@ -68,7 +68,7 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
                 showUploadList={false}
                 beforeUpload={handleUploadFile}
             >
-            {img ? <img src={img} style={{ width: '100%' }} /> : uploadButton}
+            {img ? <img src={img} alt="postPic" style={{ width: '100%' }} /> : uploadButton}
             </Upload>
             </Form.Item>
             <Form.Item name="Summary" label="Summary:" initialValue={summary} rules={[{required:true, }]}>

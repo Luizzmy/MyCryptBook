@@ -24,7 +24,7 @@ const { user } = useContextData()
       <br/>
       </Link>
       {user?
-        user._id==userId?
+        user._id===userId?
         <Button type="dash" block style={{ marginBottom: "10px" }} 
         onClick={() => setShowUpdateModal(true)}> Edit Post</Button>:"":""} 
       <Modal visible={showUptadeModal}
