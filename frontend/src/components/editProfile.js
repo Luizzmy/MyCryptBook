@@ -77,7 +77,7 @@ function EditProfile() {
           showUploadList={false}
           beforeUpload={handleUploadFile}
         >
-          {img ? <img src={img} alt="ProfilePic" style={{ width: '100%' }} /> : uploadButton}
+          {user.user.image ? <img src={user.user.image} alt="ProfilePic" style={{ width: '100%' }} /> : uploadButton}
         </Upload>
       </Form.Item>
         <Button type="primary" block size="middle" htmlType="submit">Edit Profile</Button>
