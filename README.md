@@ -1,5 +1,5 @@
 # Welcome to MyCryptBook
-Our app its a community for cyrptocurrencies traders and lovers, in which the users can make their own profiles for watching live recommendations, read articles published by other users and get informed on the most relevant news on three of the major cryptoccurencies, as well as get in touch by email with other traders.
+Our app is a community for cyrptocurrencies traders and lovers, in which the users can make their own profiles for watching live recommendations, read articles published by other users and get informed on the most relevant news on three of the major cryptoccurencies, as well as get in touch by email with other traders.
 
 ## DEMO Account
 ### Chef account
