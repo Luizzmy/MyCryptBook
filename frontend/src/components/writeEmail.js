@@ -18,9 +18,6 @@ function WriteEmail({userP}) {
         await sendEmail(userP._id, email)
         history.push('/')
     }
-    const refreshPage = ()=>{
-        window.location.reload();
-     }
 
      //Rendered
     return (

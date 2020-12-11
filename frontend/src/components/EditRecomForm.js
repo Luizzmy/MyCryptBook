@@ -20,9 +20,6 @@ function EditRecomForm({item, curr}) {
         history.push('/')
     }
 
-    const refreshPage = ()=>{
-      window.location.reload();
-   }
 
    //HandleDelete for form
     async function handleDelete(){

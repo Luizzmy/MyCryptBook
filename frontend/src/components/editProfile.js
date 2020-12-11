@@ -42,9 +42,6 @@ function EditProfile() {
         setLoading(false)
       }
 
-    const refreshPage = ()=>{
-      window.location.reload();
-   }
 
    //Upload Button setup
    const uploadButton = (

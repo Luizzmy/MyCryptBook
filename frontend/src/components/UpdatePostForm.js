@@ -39,9 +39,6 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
         setLoading(false)
       }
 
-    const refreshPage = ()=>{
-      window.location.reload();
-   }
 
    //Upload Button setup
    const uploadButton = (
@@ -55,7 +52,7 @@ const UpdatePostForm = ({ post, title, summary, comment, _id }) => {
   //Handle Delete
     async function handleDelete() {
         await postDelete(_id)
-        refreshPage()
+        history.push('/')
     }
 
 //Rendered
