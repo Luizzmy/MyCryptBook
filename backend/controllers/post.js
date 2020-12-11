@@ -61,7 +61,7 @@ exports.updatePost = async (req, res) => {
 
     if (!title || !comment) {
         return res
-            .status(403)
+            .status(401)
             .json({ message: "You need to put a title and some content to your post" })
     }
 

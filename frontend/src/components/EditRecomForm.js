@@ -15,6 +15,7 @@ function EditRecomForm({item, curr}) {
             crypto:curr
         }
         const {data:newRecom}= await recoUpdate(item._id, recomUpdated)
+        refreshPage()
     }
 
     const refreshPage = ()=>{
