@@ -82,7 +82,7 @@ function LayoutApp({ children }) {
         </Content>
 
         <Footer style={{ textAlign: 'center' }}>Created by <a href="https://github.com/Luizzmy" 
-        target="_blank" rel="noreferrer">Gabriel Valenzuela</a> & Rubén Rodríguez</Footer> 
+        target="_blank" rel="noreferrer">Gabriel Valenzuela</a></Footer> 
 
       </Layout>
     </div>

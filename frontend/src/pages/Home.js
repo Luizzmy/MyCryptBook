@@ -69,15 +69,15 @@ function Home() {
     <div>
       <div>
         <Row>
-          <Col span={12} >
+          <Col xs={0} sm={0} md={12} >
             <Text type="primary">Last prices</Text>
           </Col>
-          <Col span={12} >
+          <Col xs={0} sm={0} md={12} >
             <Text type="primary">24hr changes</Text>
           </Col>
         </Row>
         <Row style={{ justifyContent: "space-around" }}>
-          <Col span={12}>
+          <Col sm={24} md={12}>
             <div style={{ display: "flex" }}>
               <Statistic
                 title="BTC"
@@ -109,7 +109,7 @@ function Home() {
             </div>
           </Col>
 
-          <Col span={10}>
+          <Col sm={24} md={10}>
             <div style={{ display: "flex" }}>
               <Statistic
                 title="BTC"
